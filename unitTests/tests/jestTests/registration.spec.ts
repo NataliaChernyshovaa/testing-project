@@ -1,8 +1,10 @@
-import { RegistrationForm } from "../../scr/components/registration_form"
 
-export const registration_form = new RegistrationForm()
+import { RegistrationForm } from '../../scr/components/registration_form'
+
+export const registrationForm = new RegistrationForm()
 
 describe('Username tests', () => {
-    test('Should multiply int numbers', () => {
-        expect(registration_form.setUserName('Natalia')).toBe('Natalia')})
-    })
+  test('Should multiply int numbers', () => {
+    expect(registrationForm.setUserName('Natalia')).toBe('Natalia')
+  })
+})
