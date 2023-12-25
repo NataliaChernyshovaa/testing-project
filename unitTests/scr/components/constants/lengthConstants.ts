@@ -8,4 +8,4 @@ export const randomEmailBodyLengs = Math.floor(Math.random() * (maxEmailBodyLeng
 
 const minPasswordLength = 8
 const maxPasswordLength = 15
-export const randomPasswordLengs = Math.floor(Math.random() * (maxPasswordLength - minPasswordLength + 1)) + minPasswordLength;
+export const randomPasswordLenths = Math.floor(Math.random() * (maxPasswordLength - minPasswordLength + 1)) + minPasswordLength;

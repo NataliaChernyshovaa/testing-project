@@ -1,5 +1,5 @@
 import Randomstring from "randomstring"
-import { randomEmailBodyLengs, randomPasswordLengs, randomUserNameLength } from "./lengthConstants";
+import { randomEmailBodyLengs, randomPasswordLenths, randomUserNameLength } from "./lengthConstants";
 
 // Random UserName data
 
@@ -50,23 +50,38 @@ const symbols = '#$%^&!+*-';
 const lowercaseLetters = 'abcdefghijklmnopqrstuvwxyz';
 const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-export const validPassword = Randomstring.generate({
-    length: randomPasswordLengs,
-    charset: symbols + uppercaseLetters + digits + lowercaseLetters
-  });
 
-export const missingSymbolPassword = Randomstring.generate({
-      length: randomPasswordLengs,
-      charset: uppercaseLetters + digits + lowercaseLetters
-    });
+export const validPassword = 
+  [
+    Randomstring.generate({ length: 1, charset: symbols }),
+    Randomstring.generate({ length: 1, charset: uppercaseLetters }),
+    Randomstring.generate({ length: 1, charset: digits }),
+    Randomstring.generate({ length: 1, charset: lowercaseLetters }),
+    Randomstring.generate({ length: randomPasswordLenths - 4, charset: symbols + uppercaseLetters + digits + lowercaseLetters })
+  ].join('');
 
-export const lowerCasePassword = Randomstring.generate({
-        length: randomPasswordLengs,
-        charset: symbols + digits + lowercaseLetters
-    });
 
-export const missingNumberPassword = Randomstring.generate({
-        length: randomPasswordLengs,
-        charset: symbols + uppercaseLetters + lowercaseLetters
-    });
+export const missingSymbolPassword = [
+    Randomstring.generate({ length: 1, charset: uppercaseLetters }),
+    Randomstring.generate({ length: 1, charset: digits }),
+    Randomstring.generate({ length: 1, charset: lowercaseLetters }),
+    Randomstring.generate({ length: randomPasswordLenths - 4, charset: uppercaseLetters + digits + lowercaseLetters })
+  ].join('')
+
+
+export const lowerCasePassword =  [
+    Randomstring.generate({ length: 1, charset: symbols }),,
+    Randomstring.generate({ length: 1, charset: digits }),
+    Randomstring.generate({ length: 1, charset: lowercaseLetters }),
+    Randomstring.generate({ length: randomPasswordLenths - 4, charset: symbols + digits + lowercaseLetters })
+  ].join('')
+
+
+export const missingNumberPassword = [
+    Randomstring.generate({ length: 1, charset: symbols }),
+    Randomstring.generate({ length: 1, charset: uppercaseLetters }),
+    Randomstring.generate({ length: 1, charset: lowercaseLetters }),
+    Randomstring.generate({ length: randomPasswordLenths - 4, charset: symbols + uppercaseLetters + lowercaseLetters })
+  ].join('')
+
 
