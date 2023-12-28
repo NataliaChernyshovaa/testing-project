@@ -1,31 +1,83 @@
-import { emptyEmailError, emptyPasswordError, emptyUserNameError,  lowerCasePasswordError, missingAtError, missingDotError, missingNumberError, missingSymbolError, notLatinEmailError, notLatinUserNameError, userNameContainsNumberError } from './constants/errorMessages';
+import { emptyEmailError, emptyPasswordError, emptyUserNameError,  lowerCasePasswordError, missingAtError, missingDotError, missingNumberError, missingSymbolError, notLatinEmailError, notLatinUserNameError, submitError, userNameContainsNumberError } from './constants/errorMessages';
 import { digitRegex, latinAlphabetRegex, symbolRegex, uppercaseRegex } from './constants/regularExpressions';
 
 
 
 export class RegistrationForm {
-  constructor () {}
 
-  public setUserName (userName: string): string {
-    if (userName.length === 0) { throw new Error(emptyUserNameError) }
-    if (digitRegex.test(userName)) { throw new Error(userNameContainsNumberError) }
-    if (!latinAlphabetRegex.test(userName)) { throw new Error(notLatinUserNameError) }
-    return userName
+  public userName: string = '';
+  public email: string = '';
+  public password: string = '';
+  private errors: string[] = [];
+
+  public setUserName(userName: string): void {
+    this.userName = userName
+    if (userName.length === 0) { 
+      this.errors.push(emptyUserNameError)
+     }
+
+    if (digitRegex.test(userName)) { 
+      this.errors.push(userNameContainsNumberError)
+     }
+
+    if (!latinAlphabetRegex.test(userName)) { 
+      this.errors.push(notLatinUserNameError)
+    }
   }
 
-  public setEmail (email: string): string {
-    if (email.length === 0) { throw new Error(emptyEmailError) }
-    if (!email.includes('@')) { throw new Error(missingAtError) }
-    if (!email.includes('.')) { throw new Error(missingDotError) }
-    if (!latinAlphabetRegex.test(email)) { throw new Error(notLatinEmailError) }
-    return email
+  public setEmail (email: string): void {
+    this.email = email
+    if (email.length === 0) { 
+      this.errors.push(emptyEmailError)
+     }
+    if (!email.includes('@')) { 
+      this.errors.push(missingAtError)
+    }
+    if (!email.includes('.')) { 
+      this.errors.push(missingDotError)
+    }
+    if (!latinAlphabetRegex.test(email)) { 
+      this.errors.push(notLatinEmailError)
+     }
   }
 
-  public setPassword (password: string): string {
-    if (password.length === 0) { throw new Error(emptyPasswordError) }
-    if (!symbolRegex.test(password)) { throw new Error(missingSymbolError) }
-    if (!uppercaseRegex.test(password)) { throw new Error(lowerCasePasswordError)}
-    if (!digitRegex.test(password)) { throw new Error(missingNumberError)}
-    return password
+  public setPassword (password: string): void {
+    this.password = password
+    if (password.length === 0) { 
+      this.errors.push(emptyPasswordError)
+    }
+    if (!symbolRegex.test(password)) { 
+      this.errors.push(missingSymbolError)
+    }
+    if (!uppercaseRegex.test(password)) { 
+      this.errors.push(lowerCasePasswordError)
+    }
+    if (!digitRegex.test(password)) { 
+      this.errors.push(missingNumberError)
+    }
+  }
+
+  private isFormValid(): boolean {
+    return (
+      this.userName.length > 0 &&
+      this.email.length > 0 &&
+      this.password.length > 0 &&
+      !digitRegex.test(this.userName) &&
+      latinAlphabetRegex.test(this.userName) &&
+      this.email.includes('@') &&
+      this.email.includes('.') &&
+      latinAlphabetRegex.test(this.email) &&
+      symbolRegex.test(this.password) &&
+      uppercaseRegex.test(this.password) &&
+      digitRegex.test(this.password)
+    );
+  }
+
+  public submit(): void {
+    if (this.isFormValid()) {
+      console.log("Registration successful!");
+    } else {
+      throw new Error(this.errors.join('\n'));
+    }
   }
 }

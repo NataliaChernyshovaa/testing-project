@@ -16,3 +16,5 @@ export const missingSymbolError = 'Password should contain at least one of "#, $
 export const lowerCasePasswordError = 'Password should contain at least one UpperCase letter!'
 export const missingNumberError = 'Password should contain at least one number'
 
+// Error Registration message 
+export const submitError = 'Invalid form submission. Please check your inputs.'

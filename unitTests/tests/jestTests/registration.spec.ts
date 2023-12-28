@@ -1,73 +1,170 @@
-
-import { emptyEmailError, emptyPasswordError, emptyUserNameError, lowerCasePasswordError, missingAtError, missingDotError, missingNumberError, missingSymbolError, notLatinEmailError, notLatinUserNameError, userNameContainsNumberError } from '../../scr/components/constants/errorMessages';
+import { emptyEmailError, emptyPasswordError, emptyUserNameError, lowerCasePasswordError, missingAtError, missingDotError, missingNumberError, missingSymbolError, notLatinEmailError, notLatinUserNameError, submitError, userNameContainsNumberError } from '../../scr/components/constants/errorMessages';
 import { lowerCasePassword, missingNumberPassword, missingSymbolPassword, noAtEmail, noDotEmail, noLatinEmail, notLatinUserName, numbersInsideUserName, valiUserName, validEmail, validPassword } from '../../scr/components/constants/testData';
 import { RegistrationForm } from '../../scr/components/registration_form'
 
+
 export const registrationForm = new RegistrationForm()
 
+describe('Registation form UserName tests', () => {
+  test('should submit the form if all fields are valid', () => {
+    registrationForm.setUserName(valiUserName);
+    registrationForm.setEmail(validEmail);
+    registrationForm.setPassword(validPassword);
 
-describe('Username tests', () => {
-
-    test('Should return the username if valid', () => {
-      expect(registrationForm.setUserName(valiUserName)).toBe(valiUserName)
-    });
-
-    test('Should return "empty name" error message ', () => {
-        expect(() => registrationForm.setUserName('')).toThrow(new Error(emptyUserNameError));
-      });
-
-    test('Should return "not latin input" error message ', () => {
-        expect(() => registrationForm.setUserName(notLatinUserName)).toThrow(new Error(notLatinUserNameError));
-      });
-
-    test('Should return "numbers inside name" error message ', () => {
-        expect(() => registrationForm.setUserName(numbersInsideUserName)).toThrow(new Error(userNameContainsNumberError));
-      });
+    const logSpy = jest.spyOn(console, 'log');
+    registrationForm.submit();
+    expect(logSpy).toHaveBeenCalledWith('Registration successful!');
   });
 
-  describe('Email tests', () => {
+  test('should return "numbers inside name" error message', () => {
+    try {
+      registrationForm.setUserName(numbersInsideUserName);
+      registrationForm.setEmail(validEmail);
+      registrationForm.setPassword(validPassword)
 
-    test('Should return email if valid', () => {
-      expect(registrationForm.setEmail(validEmail)).toBe(validEmail)
-    });
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(userNameContainsNumberError)
+    }
+  })
 
-    test('Should return "empty email" error message', () => {
-      expect(() => registrationForm.setEmail('')).toThrow(new Error(emptyEmailError));
-    });
+  test('should return "empty name" error message', () => {
+    try {
+      registrationForm.setUserName('');
+      registrationForm.setEmail(validEmail);
+      registrationForm.setPassword(validPassword)
 
-    test('Should return "missing at" error message', () => {
-      expect(() => registrationForm.setEmail(noAtEmail)).toThrow(new Error(missingAtError));
-    });
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(emptyUserNameError)
+    }
+  })
 
-    test('Should return "missing dot" error message', () => {
-      expect(() => registrationForm.setEmail(noDotEmail)).toThrow(new Error(missingDotError));
-    });
+  test('should return "not latin input" error message', () => {
+    try {
+      registrationForm.setUserName(notLatinUserName);
+      registrationForm.setEmail(validEmail);
+      registrationForm.setPassword(validPassword)
 
-    test('Should return "email is not latin" error message', () => {
-      expect(() => registrationForm.setEmail(noLatinEmail)).toThrow(new Error(notLatinEmailError));
-    });
-
-  describe('Password tests', () => {
-
-    test ('Should return password if valid', () => {
-      expect(registrationForm.setPassword(validPassword)).toBe(validPassword)
-    });
-
-    test('Should return "missing symbols" error message', () => {
-      expect(() => registrationForm.setPassword(missingSymbolPassword)).toThrow(new Error(missingSymbolError));
-    });
-
-    test('Should return "empty password" error message', () => {
-      expect(() => registrationForm.setPassword('')).toThrow(new Error(emptyPasswordError));
-    })
-
-    test('Should return "lower case" error message', () => {
-      expect(() => registrationForm.setPassword(lowerCasePassword)).toThrow(new Error(lowerCasePasswordError));
-    })
-
-    test('Should return "missing number" error message', () => {
-      expect(() => registrationForm.setPassword(missingNumberPassword)).toThrow(new Error(missingNumberError));
-    })
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(notLatinUserNameError)
+    }
   })
 });
 
+describe('Registation form Email tests', () => {
+  test('should return "empty email" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail('');
+      registrationForm.setPassword(validPassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(emptyEmailError)
+    }
+  });
+
+  test('should return "not latin email" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail(noLatinEmail);
+      registrationForm.setPassword(validPassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(notLatinEmailError)
+    }
+  });
+
+  test('should return "missing at" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail(noAtEmail);
+      registrationForm.setPassword(validPassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(missingAtError)
+    }
+  });
+
+  test('should return "missing dot" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail(noDotEmail);
+      registrationForm.setPassword(validPassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(missingDotError)
+    }
+  });
+
+describe('Registation form Password tests', () => {
+  test('should return "empty password" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail(validEmail);
+      registrationForm.setPassword('');
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(emptyPasswordError)
+    }
+  });
+
+  test('should return "missing symbol" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail(validEmail);
+      registrationForm.setPassword(missingSymbolPassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(missingSymbolError)
+    }
+  });
+
+  test('should return "missing number" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail(validEmail);
+      registrationForm.setPassword(missingNumberPassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(missingNumberError)
+    }
+  });
+})
+
+  test('should return "lower case" error message', () => {
+    try {
+      registrationForm.setUserName(valiUserName);
+      registrationForm.setEmail(validEmail);
+      registrationForm.setPassword(lowerCasePassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(lowerCasePasswordError)
+    }
+  });
+})
+
+describe('Registation form tests', () => {
+  test('should return error messages if values are not valid', () => {
+    try {
+      registrationForm.setUserName('');
+      registrationForm.setEmail(noAtEmail);
+      registrationForm.setPassword(lowerCasePassword);
+
+      registrationForm.submit();
+    } catch (error: any) {
+      expect(error.message).toContain(emptyUserNameError)
+      expect(error.message).toContain(missingAtError)
+      expect(error.message).toContain(lowerCasePasswordError)
+    }
+  });
+})
