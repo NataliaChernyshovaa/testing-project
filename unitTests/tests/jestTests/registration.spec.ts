@@ -1,5 +1,5 @@
 import { emptyEmailError, emptyPasswordError, emptyUserNameError, lowerCasePasswordError, missingAtError, missingDotError, missingNumberError, missingSymbolError, notLatinEmailError, notLatinUserNameError, submitError, userNameContainsNumberError } from '../../scr/components/constants/errorMessages';
-import { lowerCasePassword, missingNumberPassword, missingSymbolPassword, noAtEmail, noDotEmail, noLatinEmail, notLatinUserName, numbersInsideUserName, valiUserName, validEmail, validPassword } from '../../scr/components/constants/testData';
+import { lowerCasePassword, missingNumberPassword, missingSymbolPassword, noAtEmail, noDotEmail, noLatinEmail, notLatinUserName, numbersInsideUserName, validEmail, validPassword, validUserName } from '../../scr/components/constants/testData';
 import { RegistrationForm } from '../../scr/components/registration_form'
 
 
@@ -7,7 +7,7 @@ export const registrationForm = new RegistrationForm()
 
 describe('Registation form UserName tests', () => {
   test('should submit the form if all fields are valid', () => {
-    registrationForm.setUserName(valiUserName);
+    registrationForm.setUserName(validUserName);
     registrationForm.setEmail(validEmail);
     registrationForm.setPassword(validPassword);
 
@@ -56,7 +56,7 @@ describe('Registation form UserName tests', () => {
 describe('Registation form Email tests', () => {
   test('should return "empty email" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail('');
       registrationForm.setPassword(validPassword);
 
@@ -68,7 +68,7 @@ describe('Registation form Email tests', () => {
 
   test('should return "not latin email" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail(noLatinEmail);
       registrationForm.setPassword(validPassword);
 
@@ -80,7 +80,7 @@ describe('Registation form Email tests', () => {
 
   test('should return "missing at" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail(noAtEmail);
       registrationForm.setPassword(validPassword);
 
@@ -92,7 +92,7 @@ describe('Registation form Email tests', () => {
 
   test('should return "missing dot" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail(noDotEmail);
       registrationForm.setPassword(validPassword);
 
@@ -105,7 +105,7 @@ describe('Registation form Email tests', () => {
 describe('Registation form Password tests', () => {
   test('should return "empty password" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail(validEmail);
       registrationForm.setPassword('');
 
@@ -117,7 +117,7 @@ describe('Registation form Password tests', () => {
 
   test('should return "missing symbol" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail(validEmail);
       registrationForm.setPassword(missingSymbolPassword);
 
@@ -129,7 +129,7 @@ describe('Registation form Password tests', () => {
 
   test('should return "missing number" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail(validEmail);
       registrationForm.setPassword(missingNumberPassword);
 
@@ -142,7 +142,7 @@ describe('Registation form Password tests', () => {
 
   test('should return "lower case" error message', () => {
     try {
-      registrationForm.setUserName(valiUserName);
+      registrationForm.setUserName(validUserName);
       registrationForm.setEmail(validEmail);
       registrationForm.setPassword(lowerCasePassword);
 

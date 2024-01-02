@@ -3,7 +3,7 @@ import { randomEmailBodyLengs, randomPasswordLenths, randomUserNameLength } from
 
 // Random UserName data
 
-export const valiUserName = Randomstring.generate({
+export const validUserName = Randomstring.generate({
     length: randomUserNameLength,
     charset: 'alphabetic',
   })
