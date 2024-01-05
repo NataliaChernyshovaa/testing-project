@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "unit_test:jest": "jest --config='./unitTests/configs/jest.config.js'"
+    "unit_test:jest": "jest --config='./unitTests/configs/jest.config.js'",
+    "ui_test:playwright": "playwright test --config=./UITests/configs/playwright.config.ts"
   },
   "repository": {
     "type": "git",
