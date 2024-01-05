@@ -1,9 +1,9 @@
 import { type Page } from '@playwright/test'
 import { baseUrl } from '../support/constants';
-import { BasePage } from './basePage';
 import { ROLE } from '../support/types';
+import { HomePage } from './homePage';
 
-export class RegistationPage extends BasePage {
+export class RegistationPage extends HomePage {
   constructor (page: Page) {
     super(page)
 

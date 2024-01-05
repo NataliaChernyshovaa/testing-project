@@ -2,6 +2,7 @@ import Randomstring from 'randomstring';
 
 // Base URL
 export const baseUrl = 'https://tattoolog.pl'
+export const instagramUrl = 'https://www.instagram.com/tattoolog_eu/'
 
 // Data for generating random values
     // Email 
@@ -17,3 +18,9 @@ export const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 // Messages after creating an account successfully 
 export const confirmingMessage = 'Na twój adres e-mail został wysłany e-mail'
 export const furtherInstructionmessage = 'Postępuj zgodnie z instrukcjami w e-mailu, aby zakończyć rejestrację'
+
+// 
+export const navigationItemsEn = ['ARTIST', 'STUDIO', 'FESTIVALS', 'BLOG', 'PARTNERS', 'CONTACTS']
+
+// Partners Title 
+export const bioTaTumTitle = 'bioTaTum Professional'

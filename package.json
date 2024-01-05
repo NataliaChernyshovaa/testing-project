@@ -4,9 +4,8 @@
   "description": "Unit tests, API tests, UI tests ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "unit_test:jest": "jest --config='./unitTests/configs/jest.config.js'",
-    "ui_test:playwright": "playwright test --config=./UITests/configs/playwright.config.ts"
+    "playwright:test": "playwright test --config=./UITests/configs/playwright.config.ts"
   },
   "repository": {
     "type": "git",
@@ -30,6 +29,7 @@
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.40.1",
     "@types/jest": "^29.5.11",
     "@types/randomstring": "^1.1.11",
     "@typescript-eslint/eslint-plugin": "^6.15.0",
