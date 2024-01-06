@@ -6,6 +6,7 @@
   "scripts": {
     "unit_test:jest": "jest --config='./unitTests/configs/jest.config.js'",
     "playwright:test": "playwright test --config=./UITests/configs/playwright.config.ts"
+    "api:test:superAgent": "jest --config='./apiTests/jest.config.js'"
   },
   "repository": {
     "type": "git",
@@ -22,10 +23,12 @@
   "homepage": "https://github.com/NataliaChernyshovaa/testing-project#readme",
   "dependencies": {
     "@types/node": "^20.10.5",
+    "@types/superagent": "^8.1.1",
     "eslint-config-standard-with-typescript": "^43.0.0",
     "node": "^21.2.0",
     "random-string": "^0.2.0",
     "randomstring": "^1.3.0",
+    "superagent": "^8.1.2",
     "ts-node": "^10.9.2"
   },
   "devDependencies": {
