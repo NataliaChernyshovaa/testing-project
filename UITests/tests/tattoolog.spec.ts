@@ -33,7 +33,7 @@ test.describe('Tattoolog Official Site Tests', () => {
       await page.close()
     })
   
-    test('Should display message after registration correctly', async () => {
+    test ('Should display message after registration correctly', async () => {
       await homePage.registrationLinkButton.click()
       await registrationPage.nameField.fill(randomName)
       await registrationPage.surnameField.fill(randomSurname)

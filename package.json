@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "unit_test:jest": "jest --config='./unitTests/configs/jest.config.js'",
-    "playwright:test": "playwright test --config=./UITests/configs/playwright.config.ts"
+    "playwright:test": "playwright test --config=./UITests/configs/playwright.config.ts",
     "api:test:superAgent": "jest --config='./apiTests/jest.config.js'"
   },
   "repository": {
