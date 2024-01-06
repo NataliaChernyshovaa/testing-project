@@ -2,12 +2,12 @@ import test, { expect } from '@playwright/test'
 import { HomePage } from '../src/pages/homePage';
 import { RegistationPage } from '../src/pages/registrationPage';
 import { randomName, randomSurname, randomPassword, randomEmail } from '../src/support/testData';
-import { bioTaTumTitle, confirmingMessage, furtherInstructionmessage, instagramUrl, navigationItemsEn } from '../src/support/constants';
+import { bioTaTumTitle, confirmingMessage, errorLoginMessage, furtherInstructionmessage, instagramUrl, learnMoreButtonTextPolish, navigationItemsEn } from '../src/support/constants';
 import { LANGUAGES, NAVIGATION_ITEMS } from '../src/support/types';
 import { ContactsPage } from '../src/pages/contactsPage';
 import { PartnersPage } from '../src/pages/partnersPage';
-import { ArtistsPage } from '../src/pages/artistsPage';
-
+import { BlogPage } from '../src/pages/blogPage';
+import { LoginPage } from '../src/pages/loginPage';
 
 
 test.describe('Tattoolog Official Site Tests', () => {
@@ -15,14 +15,16 @@ test.describe('Tattoolog Official Site Tests', () => {
     let registrationPage: RegistationPage;
     let contactsPage: ContactsPage;
     let partnersPage: PartnersPage;
-    let artistsPage: ArtistsPage;
+    let blogPage: BlogPage;
+    let loginPage: LoginPage
   
     test.beforeEach(async ({ page }) => {
       homePage = new HomePage(page)
       registrationPage = new RegistationPage(page)
       contactsPage = new ContactsPage(page)
       partnersPage = new PartnersPage(page)
-      artistsPage = new ArtistsPage(page)
+      blogPage = new BlogPage(page)
+      loginPage = new LoginPage(page)
     
       await homePage.visitPage()
     })
@@ -31,9 +33,8 @@ test.describe('Tattoolog Official Site Tests', () => {
       await page.close()
     })
   
-    test('Should display message correctly', async () => {
-      await homePage.registrationLink.click()
-
+    test('Should display message after registration correctly', async () => {
+      await homePage.registrationLinkButton.click()
       await registrationPage.nameField.fill(randomName)
       await registrationPage.surnameField.fill(randomSurname)
       await registrationPage.emailField.fill(randomEmail)
@@ -41,7 +42,6 @@ test.describe('Tattoolog Official Site Tests', () => {
       await registrationPage.inputRoleValue.click()
       await registrationPage.passwordField.fill(randomPassword)
       await registrationPage.repeatPasswordField.fill(randomPassword)
-
       await registrationPage.createAccountButton.click()
 
       await expect(registrationPage.messageElement).toContainText(confirmingMessage)
@@ -55,6 +55,7 @@ test.describe('Tattoolog Official Site Tests', () => {
         await contactsPage.instagramButton.click()
       ])
       await newPage.waitForLoadState();
+
       expect(newPage).toHaveURL(instagramUrl)
     });
 
@@ -63,6 +64,7 @@ test.describe('Tattoolog Official Site Tests', () => {
       await homePage.languagesSelector(LANGUAGES.ENG).click()
       await homePage.navigationMenu.isVisible()
       const receivedArray = (await homePage.navigationMenu.innerText()).split('\n').map((item: string) => item.trim());
+
       expect(receivedArray).toEqual(navigationItemsEn);
     });
 
@@ -73,15 +75,23 @@ test.describe('Tattoolog Official Site Tests', () => {
         await partnersPage.biotatumPartnerLink.click()
       ])
       await newPage.waitForLoadState();
+
       expect(await newPage.title()).toContain(bioTaTumTitle)
     });
+    
+    test('Should display button text "learn more" about blog post in Polish', async () => {
+      await homePage.navigationBar.getNavigationItemByLink(NAVIGATION_ITEMS.BLOG).click()
+      const buttonText = await blogPage.learnMoreButton.textContent()
 
-    // test.only('Should', async () => {
-    //   await homePage.navigationBar.getNavigationItemByLink(NAVIGATION_ITEMS.ARTIST_CATALOGUE).click()
-    //   await artistsPage.artistProfileLink.click()
-    //   await artistsPage.callArtistButton.click()
+      expect(buttonText).toEqual(learnMoreButtonTextPolish)
+    });
 
-    // });
+    test('Should display message after failed login correctly', async () => {
+      await homePage.loginLinkButton.click()
+      await loginPage.emailField.fill(randomEmail)
+      await loginPage.passwordField.fill(randomPassword)
+      await loginPage.LogInButton.click()
 
-
+      await expect(loginPage.messageElement).toContainText(errorLoginMessage)
+    });
 })

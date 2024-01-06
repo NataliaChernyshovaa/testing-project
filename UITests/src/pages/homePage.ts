@@ -10,8 +10,12 @@ export class HomePage extends BasePage {
     this.url = baseUrl
   }
 
-  public get registrationLink () {
+  public get registrationLinkButton() {
     return this.page.locator('a[href="/signin"]')
+  }
+
+  public get loginLinkButton () {
+    return this.page.locator('a[href="/login"]')
   }
 
   public get navigationMenu () {

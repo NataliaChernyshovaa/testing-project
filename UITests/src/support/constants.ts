@@ -19,8 +19,14 @@ export const uppercaseLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 export const confirmingMessage = 'Na twój adres e-mail został wysłany e-mail'
 export const furtherInstructionmessage = 'Postępuj zgodnie z instrukcjami w e-mailu, aby zakończyć rejestrację'
 
-// 
+// Navigation Items
 export const navigationItemsEn = ['ARTIST', 'STUDIO', 'FESTIVALS', 'BLOG', 'PARTNERS', 'CONTACTS']
 
 // Partners Title 
 export const bioTaTumTitle = 'bioTaTum Professional'
+
+// ErrorLoginMessage
+export const errorLoginMessage = 'Nie znaleziono aktywnego konta z podanymi danymi logowania' 
+
+// BlogPage buttons text
+export const learnMoreButtonTextPolish = 'Dowiedz się więcej'
