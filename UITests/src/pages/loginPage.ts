@@ -2,7 +2,6 @@ import { type Page } from '@playwright/test'
 import { baseUrl } from '../support/constants';
 import { HomePage } from './homePage';
 
-
 export class LoginPage extends HomePage {
   constructor (page: Page) {
     super(page)

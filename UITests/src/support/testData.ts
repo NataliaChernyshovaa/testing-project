@@ -1,4 +1,4 @@
-import { symbols, uppercaseLetters, digits, lowercaseLetters, minPasswordLenght, randomMailBody, emailDomen } from "./constants";
+import { symbols, uppercaseLetters, digits, lowercaseLetters, minPasswordLenght, randomMailBody, emailDomen } from './constants';
 import Randomstring from 'randomstring';
 
 // Randomly generated values for registration form test
@@ -6,7 +6,7 @@ import Randomstring from 'randomstring';
 export const randomName = Randomstring.generate({ length: 10, charset: 'alphabetic' })
 export const randomSurname = Randomstring.generate({ length: 10, charset: 'alphabetic' })
 export const randomEmail = `${randomMailBody}${emailDomen}`
-export const randomPassword = 
+export const randomPassword =
   [
     Randomstring.generate({ length: 1, charset: symbols }),
     Randomstring.generate({ length: 1, charset: uppercaseLetters }),
@@ -14,4 +14,3 @@ export const randomPassword =
     Randomstring.generate({ length: 1, charset: lowercaseLetters }),
     Randomstring.generate({ length: minPasswordLenght, charset: symbols + uppercaseLetters + digits + lowercaseLetters })
   ].join('');
-

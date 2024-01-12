@@ -1,7 +1,7 @@
 import { type Page } from '@playwright/test'
 import { baseUrl } from '../support/constants';
 import { BasePage } from './basePage';
-import { LANGUAGES } from '../support/types';
+import { type LANGUAGES } from '../support/types';
 
 export class HomePage extends BasePage {
   constructor (page: Page) {
@@ -10,7 +10,7 @@ export class HomePage extends BasePage {
     this.url = baseUrl
   }
 
-  public get registrationLinkButton() {
+  public get registrationLinkButton () {
     return this.page.locator('a[href="/signin"]')
   }
 
@@ -22,6 +22,10 @@ export class HomePage extends BasePage {
     return this.page.locator('.MuiBox-root.css-92brxf')
   }
 
+  public async getNavigationMenuInnerText () {
+    return (await this.navigationMenu.innerText()).split('\n').map((item: string) => item.trim())
+  }
+
   public get languagesButton () {
     return this.page.locator('.MuiFormControl-root.css-13sljp9')
   }
@@ -29,5 +33,4 @@ export class HomePage extends BasePage {
   public languagesSelector (language: LANGUAGES) {
     return this.page.locator(`.MuiMenu-list li:has-text("${language}")`)
   }
-  }
-
+}

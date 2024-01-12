@@ -1,5 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import superagent from 'superagent'
-import { URL, randomUser, registrationData, userData, userName, usersQuantity } from './constants';
+import { usersQuantity } from './constans/projectConstants';
+import { userData, registrationData, randomUser, userName } from './constans/testData';
+import { URL } from './constans/urls';
 
 let response: superagent.Response;
 
@@ -13,11 +16,11 @@ describe('GET method tests', () => {
     expect(response.status).toBe(200)
   })
 
-test('Should not get a single user', async () => {
+  test('Should not get a single user', async () => {
     try {
       response = await superagent.get(`${URL}/users/${usersQuantity + 1}`)
     } catch (error: any) {
-        expect(error.status).toBe(404)
+      expect(error.status).toBe(404)
     }
   })
 })
@@ -73,18 +76,16 @@ describe('PUT method tests', () => {
 })
 
 describe('PATCH method tests', () => {
-    test('Should update the user data', async () => {
-      try {
-        response = await superagent.patch(`${URL}/users/${randomUser}`)
-          .set('Content-Type', 'application/json')
-          .send(userData)
-      } catch (error: any) {
-        throw new Error(error.message)
-      }
-  
-      expect(response.status).toBe(200)
-      expect(response.body).toMatchObject(userData)
-    })
+  test('Should update the user data', async () => {
+    try {
+      response = await superagent.patch(`${URL}/users/${randomUser}`)
+        .set('Content-Type', 'application/json')
+        .send(userData)
+    } catch (error: any) {
+      throw new Error(error.message)
+    }
+
+    expect(response.status).toBe(200)
+    expect(response.body).toMatchObject(userData)
+  })
 })
-
-

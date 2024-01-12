@@ -33,7 +33,7 @@ export class RegistationPage extends HomePage {
   public get passwordField () {
     return this.page.locator('.MuiInputBase-input.MuiOutlinedInput-input.css-h4os0j').nth(3)
   }
-  
+
   public get repeatPasswordField () {
     return this.page.locator('.MuiInputBase-input.MuiOutlinedInput-input.css-h4os0j').nth(4)
   }

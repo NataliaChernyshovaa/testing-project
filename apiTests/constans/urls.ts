@@ -1,0 +1,1 @@
+export const URL: string = 'https://reqres.in/api'
